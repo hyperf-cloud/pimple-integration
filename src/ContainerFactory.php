@@ -12,15 +12,17 @@ declare(strict_types=1);
 
 namespace Hyperf\Pimple;
 
-use Hyperf\Pimple\Provider\InstantiatorProvider;
 use Hyperf\Utils\ApplicationContext;
 use Pimple;
 
 class ContainerFactory
 {
-    protected $providers = [
-        InstantiatorProvider::class,
-    ];
+    protected $providers = [];
+
+    public function __construct(array $providers = [])
+    {
+        $this->providers = $providers;
+    }
 
     public function __invoke()
     {
