@@ -14,6 +14,7 @@ composer create "hyperf/pimple:1.1.*"
 
 ```php
 <?php
+
 use Hyperf\Pimple\ContainerFactory;
 
 $container = (new ContainerFactory())();
@@ -31,7 +32,75 @@ composer require "hyperf/translation:1.1.*"
 composer require "hyperf/config:1.1.*"
 ```
 
-2. `EasySwoole` 事件注册器在 `EasySwooleEvent.php` 中，所以我们需要在 `initialize()` 中初始化我们的容器和国际化组件。
+2. 添加 国际化相关的 Provider
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Provider;
+
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\Contract\ContainerInterface;
+use Hyperf\Contract\TranslatorLoaderInterface;
+use Hyperf\Pimple\ProviderInterface;
+use Hyperf\Translation\FileLoader;
+use Hyperf\Utils\Filesystem\Filesystem;
+
+class TranslatorLoaderProvider implements ProviderInterface
+{
+    public function register(ContainerInterface $container)
+    {
+        $container->set(TranslatorLoaderInterface::class, function () use ($container) {
+            $config = $container->get(ConfigInterface::class);
+            $files = $container->get(Filesystem::class);
+            $path = $config->get('translation.path');
+
+            return make(FileLoader::class, compact('files', 'path'));
+        });
+    }
+}
+```
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Provider;
+
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\Contract\ContainerInterface;
+use Hyperf\Contract\TranslatorInterface;
+use Hyperf\Contract\TranslatorLoaderInterface;
+use Hyperf\Pimple\ProviderInterface;
+use Hyperf\Translation\Translator;
+
+class TranslatorProvider implements ProviderInterface
+{
+    public function register(ContainerInterface $container)
+    {
+        $container->set(TranslatorInterface::class, function () use ($container) {
+            $config = $container->get(ConfigInterface::class);
+            $locale = $config->get('translation.locale');
+            $fallbackLocale = $config->get('translation.fallback_locale');
+
+            $loader = $container->get(TranslatorLoaderInterface::class);
+
+            $translator = make(Translator::class, compact('loader', 'locale'));
+            $translator->setFallback((string) $fallbackLocale);
+
+            return $translator;
+        });
+    }
+}
+
+```
+
+3. `EasySwoole` 事件注册器在 `EasySwooleEvent.php` 中，所以我们需要在 `initialize()` 中初始化我们的容器和国际化组件。
+
+> 以下 Config 组件，可以自行封装，这里方便起见直接配置。
 
 ```php
 <?php
@@ -63,6 +132,44 @@ class EasySwooleEvent implements Event
         ]));
     }
 }
+```
+
+4. 修改控制器，使用国际化组件
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\HttpController;
+
+use EasySwoole\Http\AbstractInterface\Controller;
+use Hyperf\Contract\TranslatorInterface;
+use Hyperf\Utils\ApplicationContext;
+use Hyperf\Utils\Codec\Json;
+
+class Index extends Controller
+{
+    public function index()
+    {
+        $container = ApplicationContext::getContainer();
+        $translator = $container->get(TranslatorInterface::class);
+
+        $data = [
+            'id' => $translator->trans('message.hello', ['name' => 'Hyperf']),
+        ];
+
+        $this->response()->write(Json::encode($data));
+    }
+}
+
+```
+
+5. 测试
+
+```
+$ curl http://127.0.0.1:9501/
+{"id":"你好 Hyperf"}
 ```
 
 
