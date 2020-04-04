@@ -21,18 +21,20 @@
     },
     "require": {
         "php": ">=7.2",
+        "doctrine/instantiator": "^1.0",
+        "hyperf/utils": "1.1.*",
         "pimple/pimple": "^3.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
         "phpstan/phpstan": "^0.10.5",
-        "swoft/swoole-ide-helper": "dev-master"
+        "phpunit/phpunit": "^7.0"
     },
     "config": {
         "sort-packages": true
     },
     "scripts": {
-        "test": "co-phpunit -c phpunit.xml --colors=always",
+        "test": "phpunit -c phpunit.xml --colors=always",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 ./src",
         "cs-fix": "php-cs-fixer fix $1"
     },
