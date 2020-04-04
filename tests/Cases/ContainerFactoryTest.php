@@ -15,6 +15,8 @@ namespace HyperfTest\Cases;
 use Hyperf\Pimple\Container;
 use Hyperf\Pimple\ContainerFactory;
 use Hyperf\Utils\ApplicationContext;
+use HyperfTest\Stub\BarProvider;
+use HyperfTest\Stub\Foo;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -31,5 +33,17 @@ class ContainerFactoryTest extends AbstractTestCase
 
         $this->assertInstanceOf(Container::class, $container);
         $this->assertSame($container, ApplicationContext::getContainer());
+    }
+
+    public function testProviderRegister()
+    {
+        $container = (new ContainerFactory([
+            BarProvider::class,
+        ]))();
+
+        $this->assertInstanceOf(Container::class, $container);
+        $this->assertSame($container, ApplicationContext::getContainer());
+        $bar = $container->get('Bar');
+        $this->assertInstanceOf(Foo::class, $bar);
     }
 }

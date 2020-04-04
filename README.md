@@ -22,15 +22,48 @@ $container = (new ContainerFactory())();
 
 ### `EasySwoole` 接入 `hyperf/translation`
 
-因为 `EasySwoole` 的容器组件暂时并没有实现 `PSR11` 规范，所以无法直接使用。以下则是接入步骤：
+因为 `EasySwoole` 的容器组件暂时并没有实现 `PSR11` 规范，所以无法直接使用。接入步骤如下：
 
-1. 首先引入 `hyperf/translation` 组件
+1. 首先引入相关组件
 
 ```
 composer require "hyperf/translation:1.1.*"
+composer require "hyperf/config:1.1.*"
 ```
 
 2. `EasySwoole` 事件注册器在 `EasySwooleEvent.php` 中，所以我们需要在 `initialize()` 中初始化我们的容器和国际化组件。
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace EasySwoole\EasySwoole;
+
+use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\EasySwoole\Swoole\EventRegister;
+use EasySwoole\Http\Request;
+use EasySwoole\Http\Response;
+use Hyperf\Config\Config;
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\Pimple\ContainerFactory;
+
+class EasySwooleEvent implements Event
+{
+    public static function initialize()
+    {
+        date_default_timezone_set('Asia/Shanghai');
+        $container = (new ContainerFactory())();
+        $container->set(ConfigInterface::class, new Config([
+            'translation' => [
+                'locale' => 'zh_CN',
+                'fallback_locale' => 'en',
+                'path' => EASYSWOOLE_ROOT . '/storage/languages',
+            ],
+        ]));
+    }
+}
+```
 
 
 

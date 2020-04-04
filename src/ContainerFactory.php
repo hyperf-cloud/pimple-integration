@@ -26,12 +26,13 @@ class ContainerFactory
 
     public function __invoke()
     {
-        $pimple = new Pimple\Container();
+        $container = new Container(new Pimple\Container());
         foreach ($this->providers as $provider) {
-            $pimple->register(new $provider());
+            /** @var ProviderInterface $instance */
+            $instance = new $provider();
+            $instance->register($container);
         }
 
-        $container = new Container($pimple);
         return ApplicationContext::setContainer($container);
     }
 }
