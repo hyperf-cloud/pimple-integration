@@ -14,9 +14,9 @@ namespace HyperfTest\Stub;
 
 use Psr\Container\ContainerInterface;
 
-class Foo
+class Foo2
 {
-    public function __construct(ContainerInterface $container, int $id = 1)
+    public function __construct(ContainerInterface $container, int $id)
     {
     }
 }
