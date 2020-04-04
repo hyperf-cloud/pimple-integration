@@ -165,7 +165,21 @@ class Index extends Controller
 
 ```
 
-5. 测试
+5. 添加国际化配置
+
+```php
+// storage/languages/en/message.php
+return [
+    'hello' => 'Hello :name',
+];
+
+// storage/languages/zh_CN/message.php
+return [
+    'hello' => '你好 :name',
+];
+```
+
+6. 测试
 
 ```
 $ curl http://127.0.0.1:9501/
