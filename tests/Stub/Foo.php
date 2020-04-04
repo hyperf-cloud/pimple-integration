@@ -16,7 +16,10 @@ use Psr\Container\ContainerInterface;
 
 class Foo
 {
+    protected $id;
+
     public function __construct(ContainerInterface $container, int $id = 1)
     {
+        $this->id = $id;
     }
 }

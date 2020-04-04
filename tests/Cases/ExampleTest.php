@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases;
 
+use HyperfTest\Stub\Foo3;
+
 /**
  * @internal
  * @coversNothing
@@ -23,5 +25,13 @@ class ExampleTest extends AbstractTestCase
         $this->assertTrue(true);
 
         $this->assertTrue(extension_loaded('swoole'));
+
+        $foo = new Foo3(1);
+        $ids = $foo->getIds();
+        $id = &$ids[0];
+        ++$id;
+
+        $this->assertSame([1], $foo->getIds());
+        $this->assertSame([2], $ids);
     }
 }

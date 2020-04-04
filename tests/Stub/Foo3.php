@@ -14,7 +14,15 @@ namespace HyperfTest\Stub;
 
 class Foo3
 {
+    protected $ids = [];
+
     public function __construct(int $id)
     {
+        $this->ids[] = $id;
+    }
+
+    public function getIds(): array
+    {
+        return $this->ids;
     }
 }
