@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/hyperf-cloud/pimple-integration.svg?branch=master)](https://travis-ci.org/hyperf-cloud/pimple-integration)
 
-`hyperf/pimple` 是基于 `pimple/pimple` 实现的轻量级 `PSR11 规范` 的容器组件。可以减少其他框架使用 Hyperf 组件时的成本。
+`hyperf/pimple` 是基于 `pimple/pimple` 实现的轻量级符合 `PSR11 规范` 的容器组件。可以减少其他框架使用 Hyperf 组件时的成本。
 
 ## 安装
 
@@ -23,7 +23,7 @@ $container = (new ContainerFactory())();
 
 ### `EasySwoole` 接入 `hyperf/translation`
 
-因为 `EasySwoole` 的容器组件暂时并没有实现 `PSR11` 规范，所以无法直接使用。接入步骤如下：
+因为 `EasySwoole` 的容器组件暂时并没有实现 `PSR11` 规范，所以无法直接使用。
 
 1. 首先引入相关组件
 
