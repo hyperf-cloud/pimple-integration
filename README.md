@@ -7,7 +7,7 @@
 ## 安装
 
 ```
-composer create "hyperf/pimple:1.1.*"
+composer require "hyperf/pimple:1.1.*"
 ```
 
 ## 使用
@@ -156,7 +156,7 @@ class Index extends Controller
         $translator = $container->get(TranslatorInterface::class);
 
         $data = [
-            'id' => $translator->trans('message.hello', ['name' => 'Hyperf']),
+            'message' => $translator->trans('message.hello', ['name' => 'Hyperf']),
         ];
 
         $this->response()->write(Json::encode($data));
@@ -183,7 +183,7 @@ return [
 
 ```
 $ curl http://127.0.0.1:9501/
-{"id":"你好 Hyperf"}
+{"message":"你好 Hyperf"}
 ```
 
 
