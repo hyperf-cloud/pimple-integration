@@ -17,6 +17,7 @@ use Hyperf\Utils\Filesystem\Filesystem;
 use HyperfTest\Stub\Foo;
 use HyperfTest\Stub\Foo2;
 use HyperfTest\Stub\Foo3;
+use HyperfTest\Stub\Foo4;
 use Pimple;
 
 /**
@@ -55,5 +56,22 @@ class ContainerTest extends AbstractTestCase
 
         $res = $container->make(Foo3::class, [1]);
         $this->assertInstanceOf(Foo3::class, $res);
+
+        $res = $container->make(Foo4::class);
+        $this->assertInstanceOf(Foo4::class, $res);
+        $this->assertSame(1, $res->id);
+    }
+
+    public function testGet()
+    {
+        $container = new Container(new Pimple\Container());
+
+        $res = $container->get(Foo4::class);
+
+        ++$res->id;
+
+        $res = $container->get(Foo4::class);
+
+        $this->assertSame(2, $res->id);
     }
 }

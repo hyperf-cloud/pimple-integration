@@ -15,6 +15,7 @@ namespace Hyperf\Pimple;
 use Hyperf\Contract\ContainerInterface;
 use Hyperf\Pimple\Exception\InvalidDefinitionException;
 use Hyperf\Pimple\Exception\NotFoundException;
+use Hyperf\Pimple\Exception\NotSupportException;
 use Pimple;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use ReflectionClass;
@@ -82,7 +83,7 @@ class Container implements ContainerInterface
 
     public function define(string $name, $definition)
     {
-        // throw new \RuntimeException()
+        throw new NotSupportException('Method define is not support.');
     }
 
     protected function resolveParameters(ReflectionMethod $method, $parameters = [])
