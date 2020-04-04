@@ -4,7 +4,9 @@
     "license": "MIT",
     "keywords": [
         "php",
-        "hyperf"
+        "hyperf",
+        "container",
+        "psr11"
     ],
     "description": "Pimple Container",
     "autoload": {
@@ -19,12 +21,11 @@
     },
     "require": {
         "php": ">=7.2",
-        "ext-swoole": ">=4.4"
+        "pimple/pimple": "^3.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
         "phpstan/phpstan": "^0.10.5",
-        "hyperf/testing": "1.1.*",
         "swoft/swoole-ide-helper": "dev-master"
     },
     "config": {
@@ -36,6 +37,9 @@
         "cs-fix": "php-cs-fixer fix $1"
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "1.1-dev"
+        },
         "hyperf": {
             "config": "Hyperf\\Pimple\\ConfigProvider"
         }

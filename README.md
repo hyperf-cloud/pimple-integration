@@ -1,5 +1,5 @@
-# component-creater
+# Pimple Container
 
 ```
-composer create-project hyperf/component-creater
+composer create "hyperf/pimple:1.1.*"
 ```
