@@ -22,7 +22,7 @@
     "require": {
         "php": ">=7.2",
         "doctrine/instantiator": "^1.0",
-        "hyperf/utils": "1.1.*",
+        "hyperf/utils": "2.0.*",
         "pimple/pimple": "^3.3"
     },
     "require-dev": {
