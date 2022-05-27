@@ -50,7 +50,7 @@ class Container implements ContainerInterface
         return $this->pimple[$id] = $this->make($id);
     }
 
-    public function has($id)
+    public function has($id): bool
     {
         return isset($this->pimple[$id]);
     }
@@ -75,14 +75,19 @@ class Container implements ContainerInterface
         return $instance;
     }
 
-    public function set(string $name, $entry)
+    public function set(string $name, $entry): void
     {
         $this->pimple[$name] = $entry;
     }
 
-    public function define(string $name, $definition)
+    public function define(string $name, $definition): void
     {
         throw new NotSupportException('Method define is not support.');
+    }
+
+    public function unbind(string $name): void
+    {
+        $this->pimple[$name] = null;
     }
 
     protected function resolveParameters(ReflectionMethod $method, $parameters = [])
@@ -93,8 +98,8 @@ class Container implements ContainerInterface
                 $value = $parameters[$parameter->getName()];
             } elseif (array_key_exists($index, $parameters)) {
                 $value = $parameters[$index];
-            } elseif ($parameter->getClass() && $this->has($parameter->getClass()->getName())) {
-                $value = $this->get($parameter->getClass()->getName());
+            } elseif ($parameter->getType() && $this->has($parameter->getType()->getName())) {
+                $value = $this->get($parameter->getType()->getName());
             } else {
                 if ($parameter->isDefaultValueAvailable() || $parameter->isOptional()) {
                     $value = $this->getParameterDefaultValue($parameter, $method);
