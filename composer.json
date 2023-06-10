@@ -21,7 +21,6 @@
     },
     "require": {
         "php": ">=8.0",
-        "doctrine/instantiator": "^1.0",
         "hyperf/context": "^3.0",
         "hyperf/contract": "^3.0",
         "pimple/pimple": "^3.3"
