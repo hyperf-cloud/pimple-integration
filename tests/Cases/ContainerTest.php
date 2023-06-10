@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases;
 
 use Hyperf\Pimple\Container;
-use Hyperf\Utils\Filesystem\Filesystem;
+use Hyperf\Support\Filesystem\Filesystem;
 use HyperfTest\Stub\Foo;
 use HyperfTest\Stub\Foo2;
 use HyperfTest\Stub\Foo3;

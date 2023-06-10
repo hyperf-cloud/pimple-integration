@@ -11,9 +11,9 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Cases;
 
+use Hyperf\Context\ApplicationContext;
 use Hyperf\Pimple\Container;
 use Hyperf\Pimple\ContainerFactory;
-use Hyperf\Utils\ApplicationContext;
 use HyperfTest\Stub\BarProvider;
 use HyperfTest\Stub\Foo;
 use Mockery;
