@@ -1,6 +1,6 @@
 # Pimple Container
 
-[![Build Status](https://travis-ci.org/hyperf-cloud/pimple-integration.svg?branch=master)](https://travis-ci.org/hyperf-cloud/pimple-integration)
+[![PHPUnit](https://github.com/hyperf-cloud/pimple-integration/actions/workflows/test.yml/badge.svg)](https://github.com/hyperf-cloud/pimple-integration/actions/workflows/test.yml)
 
 `hyperf/pimple` 是基于 `pimple/pimple` 实现的轻量级符合 `PSR11 规范` 的容器组件。可以减少其他框架使用 Hyperf 组件时的成本。
 
