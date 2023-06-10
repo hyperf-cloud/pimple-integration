@@ -33,7 +33,6 @@ jobs:
           php -i
       - name: Setup Packages
         run: |
-          composer require "hyperf/utils: $HF_VERSION"
           composer update -o
       - name: Run Test Cases
         run: |
