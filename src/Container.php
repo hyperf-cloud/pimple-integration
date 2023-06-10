@@ -25,18 +25,12 @@ use ReflectionParameter;
 class Container implements ContainerInterface
 {
     /**
-     * @var Pimple\Container
-     */
-    protected $pimple;
-
-    /**
      * @var ReflectionClass[]
      */
     protected $reflection = [];
 
-    public function __construct(Pimple\Container $pimple)
+    public function __construct(protected Pimple\Container $pimple)
     {
-        $this->pimple = $pimple;
         $this->pimple[ContainerInterface::class] = $this;
         $this->pimple[PsrContainerInterface::class] = $this;
     }

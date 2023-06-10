@@ -11,8 +11,9 @@ declare(strict_types=1);
  */
 namespace Hyperf\Pimple\Exception;
 
+use Exception;
 use Psr\Container\ContainerExceptionInterface;
 
-class InvalidDefinitionException extends \Exception implements ContainerExceptionInterface
+class InvalidDefinitionException extends Exception implements ContainerExceptionInterface
 {
 }

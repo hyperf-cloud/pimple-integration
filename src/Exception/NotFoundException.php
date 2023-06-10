@@ -12,7 +12,8 @@ declare(strict_types=1);
 namespace Hyperf\Pimple\Exception;
 
 use Psr\Container\NotFoundExceptionInterface;
+use RuntimeException;
 
-class NotFoundException extends \RuntimeException implements NotFoundExceptionInterface
+class NotFoundException extends RuntimeException implements NotFoundExceptionInterface
 {
 }

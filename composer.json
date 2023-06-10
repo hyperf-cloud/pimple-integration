@@ -20,9 +20,10 @@
         }
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "doctrine/instantiator": "^1.0",
-        "hyperf/utils": "^2.2|^3.0",
+        "hyperf/context": "^3.0",
+        "hyperf/contract": "^3.0",
         "pimple/pimple": "^3.3"
     },
     "require-dev": {

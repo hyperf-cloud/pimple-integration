@@ -16,6 +16,7 @@ use Hyperf\Pimple\ContainerFactory;
 use Hyperf\Utils\ApplicationContext;
 use HyperfTest\Stub\BarProvider;
 use HyperfTest\Stub\Foo;
+use Mockery;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -26,7 +27,7 @@ class ContainerFactoryTest extends AbstractTestCase
 {
     public function testContainerFactory()
     {
-        ApplicationContext::setContainer(\Mockery::mock(ContainerInterface::class));
+        ApplicationContext::setContainer(Mockery::mock(ContainerInterface::class));
 
         $container = (new ContainerFactory())();
 

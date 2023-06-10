@@ -11,16 +11,13 @@ declare(strict_types=1);
  */
 namespace Hyperf\Pimple;
 
-use Hyperf\Utils\ApplicationContext;
+use Hyperf\Context\ApplicationContext;
 use Pimple;
 
 class ContainerFactory
 {
-    protected $providers = [];
-
-    public function __construct(array $providers = [])
+    public function __construct(protected array $providers = [])
     {
-        $this->providers = $providers;
     }
 
     public function __invoke()
