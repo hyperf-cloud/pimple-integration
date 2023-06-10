@@ -9,11 +9,8 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        php-version: [ '7.4', '8.0' ]
-        hyperf-version: [ '^2.2', '^3.0' ]
-        exclude:
-          - php-version: '7.4'
-            hyperf-version: '^3.0'
+        php-version: [ '8.0', '8.1', '8.2' ]
+        hyperf-version: [ '^3.0' ]
       max-parallel: 5
     env:
       HF_VERSION: ${{ matrix.hyperf-version }}
